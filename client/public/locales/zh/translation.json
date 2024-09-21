@@ -3,7 +3,9 @@
     "notfound": "将文章别名设置为 about 可以创建关于页面",
     "title": "关于"
   },
-  "essay": "记事", 
+  "essay": {
+    "title": "说说"
+  },
   "alert": "提示",
   "alias": "别名",
   "article": {
