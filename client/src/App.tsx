@@ -16,6 +16,7 @@ import { HashtagsPage } from './page/hashtags.tsx'
 import { Settings } from "./page/settings.tsx"
 import { TimelinePage } from './page/timeline'
 import { WritingPage } from './page/writing'
+import { EssayPage } from './page/essay'
 import { ClientConfigContext, ConfigWrapper, defaultClientConfig } from './state/config.tsx'
 import { Profile, ProfileContext } from './state/profile'
 import { headersWithAuth } from './utils/auth'
@@ -79,6 +80,9 @@ function App() {
               <TimelinePage />
             </RouteMe>
 
+            <RouteMe path="/essay">
+              <EssayPage />
+            </RouteMe>
 
             <RouteMe path="/friends">
               <FriendsPage />

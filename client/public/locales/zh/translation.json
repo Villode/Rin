@@ -3,10 +3,7 @@
     "notfound": "将文章别名设置为 about 可以创建关于页面",
     "title": "关于"
   },
-  "essay": {
-    "notfound": "将文章别名设置为 essay 可以创建说说页面",
-    "title": "说说"
-  },
+
   "alert": "提示",
   "alias": "别名",
   "article": {
@@ -198,6 +195,7 @@
   "summary": "简介",
   "tags": "标签",
   "timeline": "时间轴",
+  "essay":"说说",
   "title": "标题",
   "title_empty": "标题不能为空",
   "top": {
