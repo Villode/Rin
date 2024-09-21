@@ -3,6 +3,7 @@
     "notfound": "Set the article alias to `about` to create an about page",
     "title": "About"
   },
+  "essay": "essay", 
   "alert": "Alert",
   "alias": "Alias",
   "article": {

@@ -8,8 +8,10 @@ export const EssayPage = () => {
       </Helmet>
       <div>
         <h1>Essay</h1>
-        <p>Welcome to the Essay page. Here you can write or browse essays.</p>
+        <p>这里是说说</p>
       </div>
     </>
   );
 };
+
+
