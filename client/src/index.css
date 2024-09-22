@@ -14,9 +14,17 @@
 }
 
 body {
-  @apply bg-background-light dark:bg-background-dark text-gray-800;
+  background-color: #f0f0f0;
+  background-image: url(https://cali.so/grid.svg);
   font-family: Cantarell, "Source Han Serif CN VF" !important;
 }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #000212;
+  }
+}
+
 
 textarea:focus {
   outline: none;
