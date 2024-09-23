@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import Balancer from 'react-wrap-balancer';
@@ -29,13 +29,27 @@ export const EssayPage = () => {
   const { t } = useTranslation();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  const handleImageClick = (image: string) => {
+  // 优化函数引用
+  const handleImageClick = useCallback((image: string) => {
     setSelectedImage(image);
-  };
+  }, []);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setSelectedImage(null);
-  };
+  }, []);
+
+  // 增加通过键盘 ESC 键关闭图片模态框的功能
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        handleClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleClose]);
 
   return (
     <>
@@ -54,7 +68,10 @@ export const EssayPage = () => {
 
         <div className="flex flex-wrap gap-4">
           {posts.map((post, index) => (
-            <div key={index} className="w-80 p-4 bg-white dark:bg-zinc-800 shadow-lg rounded-lg">
+            <div
+              key={index}
+              className="w-80 p-4 bg-white dark:bg-zinc-800 shadow-lg rounded-lg transition-all duration-300 hover:shadow-xl hover:bg-zinc-200 dark:hover:bg-zinc-700"
+            >
               <div className="flex items-center mb-4">
                 <span className="text-sm font-medium text-zinc-500 dark:text-zinc-400">{post.date}</span>
                 <span className="ml-4 px-2 py-1 text-xs font-semibold text-white bg-blue-500 rounded-full">{post.label}</span>
@@ -67,15 +84,20 @@ export const EssayPage = () => {
                   className="w-full h-auto rounded-lg cursor-pointer"
                   style={{ objectFit: 'cover' }}
                   onClick={() => handleImageClick(post.image)}
+                  loading="lazy"
                 />
               )}
             </div>
           ))}
         </div>
 
+
         {/* Modal for displaying large image */}
         {selectedImage && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50" onClick={handleClose}>
+          <div
+            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50"
+            onClick={handleClose}
+          >
             <div className="relative bg-white p-4 rounded-lg">
               <button
                 className="absolute top-2 right-2 text-white bg-black rounded-full p-2"
