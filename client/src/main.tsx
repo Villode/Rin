@@ -13,33 +13,36 @@ import './components.css'
 import { siteName } from './utils/constants'
 import { listenSystemMode } from './utils/darkModeUtils'
 import LanguageDetector from 'i18next-browser-languagedetector';
+
 export const endpoint = process.env.API_URL || 'http://localhost:3001'
 export const oauth_url = process.env.API_URL + '/user/github'
 export const client = treaty<Server>(endpoint)
 listenSystemMode()
+
 i18n
   .use(Backend)
   .use(LanguageDetector)
-  .use(initReactI18next) // passes i18n down to react-i18next
+  .use(initReactI18next)
   .init({
     backend: {
       loadPath: '/locales/{{lng}}/{{ns}}.json',
     },
-    // the translations
-    // (tip move them in a JSON file and import them,
-    // or even better, manage them via a UI: https://react.i18next.com/guides/multiple-translation-files#manage-your-translations-with-a-management-gui)
     load: 'languageOnly',
     fallbackLng: "en",
     interpolation: {
-      escapeValue: false // react already safes from xss => https://www.i18next.com/translation-function/interpolation#unescape
+      escapeValue: false
     }
   });
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Helmet>
       <title>{siteName}</title>
+      {/* 添加 Live2D 脚本 */}
+      <script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
     </Helmet>
     <App />
   </React.StrictMode>
 )
+
 Modal.setAppElement('#root');
