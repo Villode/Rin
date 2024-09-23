@@ -24,7 +24,7 @@ export const EssayPage = () => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        const data = await response.json();
+        const data: Post[] = await response.json(); // 明确指定类型
         setPosts(data);
       } catch (error) {
         console.error('Failed to fetch posts:', error);
