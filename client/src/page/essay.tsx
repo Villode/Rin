@@ -4,25 +4,43 @@ import { useTranslation } from 'react-i18next';
 import Balancer from 'react-wrap-balancer';
 import { Container } from '../components/ui/Container.tsx';
 
-
+interface Post {
+  date: string;
+  label: string;
+  content: string;
+  image: string;
+}
 
 export const EssayPage = () => {
   const { t } = useTranslation();
-  const [posts, setPosts] = useState([]);
-  // const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   // 获取 JSON 数据
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch('../components/essay/essay.json'); // 替换为你的 JSON 文件路径
-      const data = await response.json();
-      setPosts(data);
+      try {
+        const response = await fetch('../components/essay/essay.json'); // 替换为你的 JSON 文件路径
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setPosts(data);
+      } catch (error) {
+        console.error('Failed to fetch posts:', error);
+      }
     };
 
     fetchPosts();
   }, []);
 
-  // 其他事件处理函数...
+  const handleImageClick = (image: string) => {
+    setSelectedImage(image);
+  };
+
+  const handleClose = () => {
+    setSelectedImage(null);
+  };
 
   return (
     <>
