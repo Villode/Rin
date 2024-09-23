@@ -9,7 +9,7 @@ import { Container } from '../components/ui/Container.tsx';
 export const EssayPage = () => {
   const { t } = useTranslation();
   const [posts, setPosts] = useState([]);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  // const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   // 获取 JSON 数据
   useEffect(() => {
