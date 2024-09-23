@@ -3,9 +3,7 @@
     "notfound": "About ページを作成するには、記事のエイリアスを about に設定します",
     "title": "概要"
   },
-  "essay": {
-    "title": "随笔"
-  },
+  "essay": "エッセイ",
   "alert": "警告",
   "alias": "エイリアス",
   "article": {
