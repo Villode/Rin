@@ -1,55 +1,28 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import Balancer from 'react-wrap-balancer';
 import { Container } from '../components/ui/Container.tsx';
 
-const posts = [
-  {
-    date: '2024-09-15',
-    label: '前端开发',
-    content: '最近在研究 React 18 的新特性，发现其中的 Concurrent Mode 非常有趣。你们有什么看法？',
-    image: 'https://img02.anheyu.com/adminuploads/1/2022/11/17/637580acb12b3.webp',
-  },
-  {
-    date: '2024-09-14',
-    label: 'UI/UX 设计',
-    content: '重新设计了一个用户界面，使用了新的颜色方案和排版风格。看起来效果不错！',
-    image: 'https://img02.anheyu.com/adminuploads/1/2022/11/17/637580acb12b3.webp',
-  },
-  {
-    date: '2024-09-13',
-    label: '创业经验',
-    content: '最近我们公司完成了一个重要的项目，感觉很有成就感。创业路上充满挑战，但也很有意义。',
-    image: 'https://img02.anheyu.com/adminuploads/1/2022/11/17/637580acb12b3.webp',
-  },
-];
+
 
 export const EssayPage = () => {
   const { t } = useTranslation();
+  const [posts, setPosts] = useState([]);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  // 优化函数引用
-  const handleImageClick = useCallback((image: string) => {
-    setSelectedImage(image);
-  }, []);
-
-  const handleClose = useCallback(() => {
-    setSelectedImage(null);
-  }, []);
-
-  // 增加通过键盘 ESC 键关闭图片模态框的功能
+  // 获取 JSON 数据
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        handleClose();
-      }
+    const fetchPosts = async () => {
+      const response = await fetch('../components/essay/essay.json'); // 替换为你的 JSON 文件路径
+      const data = await response.json();
+      setPosts(data);
     };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [handleClose]);
+
+    fetchPosts();
+  }, []);
+
+  // 其他事件处理函数...
 
   return (
     <>
@@ -90,7 +63,6 @@ export const EssayPage = () => {
             </div>
           ))}
         </div>
-
 
         {/* Modal for displaying large image */}
         {selectedImage && (
