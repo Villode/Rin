@@ -6,15 +6,21 @@ import { Container } from '../components/ui/Container.tsx';
 
 const posts = [
   {
-    date: '2024-09-20',
-    label: '生活记录',
-    content: '今天去公园散步，遇到了一只可爱的小狗。',
+    date: '2024-09-15',
+    label: '前端开发',
+    content: '最近在研究 React 18 的新特性，发现其中的 Concurrent Mode 非常有趣。你们有什么看法？',
     image: 'https://img02.anheyu.com/adminuploads/1/2022/11/17/637580acb12b3.webp',
   },
   {
-    date: '2024-09-18',
-    label: '工作感悟',
-    content: '完成了一个新的项目，感觉非常充实！',
+    date: '2024-09-14',
+    label: 'UI/UX 设计',
+    content: '重新设计了一个用户界面，使用了新的颜色方案和排版风格。看起来效果不错！',
+    image: 'https://img02.anheyu.com/adminuploads/1/2022/11/17/637580acb12b3.webp',
+  },
+  {
+    date: '2024-09-13',
+    label: '创业经验',
+    content: '最近我们公司完成了一个重要的项目，感觉很有成就感。创业路上充满挑战，但也很有意义。',
     image: 'https://img02.anheyu.com/adminuploads/1/2022/11/17/637580acb12b3.webp',
   },
 ];
@@ -23,6 +29,7 @@ export const EssayPage = () => {
   const { t } = useTranslation();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
+  // 优化函数引用
   const handleImageClick = useCallback((image: string) => {
     setSelectedImage(image);
   }, []);
@@ -31,6 +38,7 @@ export const EssayPage = () => {
     setSelectedImage(null);
   }, []);
 
+  // 增加通过键盘 ESC 键关闭图片模态框的功能
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -54,7 +62,7 @@ export const EssayPage = () => {
             {t('essay')}
           </h1>
           <p className="my-6 text-base text-zinc-600 dark:text-zinc-400">
-            <Balancer>这里是我的日常说说分享，记录一些生活中的点滴和感悟。</Balancer>
+            <Balancer>欢迎来到我的动态页面。在这里，我会分享一些关于前端开发、UI/UX设计和创业经验的最新动态。</Balancer>
           </p>
         </header>
 
@@ -83,6 +91,8 @@ export const EssayPage = () => {
           ))}
         </div>
 
+
+        {/* Modal for displaying large image */}
         {selectedImage && (
           <div
             className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50"
