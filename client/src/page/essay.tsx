@@ -20,7 +20,7 @@ export const EssayPage = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch('../components/essay/essay.json'); // 替换为你的 JSON 文件路径
+        const response = await fetch('/components/essay/essay.json');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
