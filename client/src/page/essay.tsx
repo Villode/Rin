@@ -20,8 +20,8 @@ export const EssayPage = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch('../components/essay/essay.json');
-        
+        const response = await fetch('/public/essayessay.json');
+
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
