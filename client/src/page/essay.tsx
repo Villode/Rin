@@ -21,21 +21,21 @@ export const EssayPage = () => {
     const fetchPosts = async () => {
       try {
         const response = await fetch('https://image.002777.xyz/essay/essay.json');
-    
+  
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-    
-        const data = await response.json();  // 直接解析为 JSON 对象
+  
+        const data: Post[] = await response.json();  // 使用类型断言
         setPosts(data);
       } catch (error) {
         console.error('Failed to fetch posts:', error);
       }
     };
-    
   
     fetchPosts();
   }, []);
+  
   
 
   const handleImageClick = (image: string) => {
