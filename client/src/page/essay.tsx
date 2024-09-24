@@ -20,7 +20,9 @@ export const EssayPage = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch('/components/essay/essay.json');
+        const response = await fetch('../components/essay/essay.json');
+        const text = await response.text();
+        console.log(text); // 打印看看实际返回的内容是什么
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
