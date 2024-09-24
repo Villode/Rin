@@ -21,20 +21,22 @@ export const EssayPage = () => {
     const fetchPosts = async () => {
       try {
         const response = await fetch('../components/essay/essay.json');
-        const text = await response.text();
-        console.log(text); // 打印看看实际返回的内容是什么
+        
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        const data: Post[] = await response.json(); // 明确指定类型
+        const text = await response.text();  // 用 text() 方法调试
+        console.log('Response:', text);  // 打印原始响应
+        const data = JSON.parse(text);  // 手动解析 JSON
         setPosts(data);
       } catch (error) {
         console.error('Failed to fetch posts:', error);
       }
     };
-
+  
     fetchPosts();
   }, []);
+  
 
   const handleImageClick = (image: string) => {
     setSelectedImage(image);
