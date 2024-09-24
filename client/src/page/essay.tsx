@@ -20,20 +20,19 @@ export const EssayPage = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch('https://image.002777.xyz/essay/essay.json'); // 改为外部链接
-  
+        const response = await fetch('https://image.002777.xyz/essay/essay.json');
+    
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-  
-        const text = await response.text();  // 用 text() 方法调试
-        console.log('Response:', text);  // 打印原始响应
-        const data = JSON.parse(text);  // 手动解析 JSON
+    
+        const data = await response.json();  // 直接解析为 JSON 对象
         setPosts(data);
       } catch (error) {
         console.error('Failed to fetch posts:', error);
       }
     };
+    
   
     fetchPosts();
   }, []);
